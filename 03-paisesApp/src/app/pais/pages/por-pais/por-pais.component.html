@@ -11,6 +11,25 @@
     </div>
   </div>
 
+  <ul *ngIf="mostrarSugerencias" class="list-group">
+    <li
+      *ngFor="let paisSugerido of paisesSugeridos"
+      class="list-group-item list-group-item-action"
+    >
+      <a class="nav-link" [routerLink]="['/pais',paisSugerido.cca2]">
+        {{paisSugerido.name.common}}
+      </a>
+    </li>
+    <li
+      (click)="buscarSugerido(termino)"
+      class="list-group-item list-group-item-action"
+    >
+      <a class="nav-link">
+        Buscar "{{termino}}"
+      </a>
+    </li>
+  </ul>
+
   <hr>
   <div *ngIf="hayError" class="alert alert-danger">
     No se encontraron resultados con el termino {{termino}}
