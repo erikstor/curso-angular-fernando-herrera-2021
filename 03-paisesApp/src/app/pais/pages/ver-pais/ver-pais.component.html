@@ -1,1 +1,53 @@
-<p>ver-pais works!</p>
+<div *ngIf="!pais; else divPais" class="alert alert-info">
+  Espere por favor...
+</div>
+
+
+<ng-template #divPais>
+  <div class="row">
+    <div class="col-12">
+      <h1>Pa&iacute;s: <small>{{pais.name.official}}</small></h1>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-4">
+      <h3>Bandera</h3>
+      <img class="img-thumbnail" [src]="pais.flags.svg" alt="pais.name">
+    </div>
+
+    <div class="col">
+      <h3>Informaci&oacute;n</h3>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <strong>Poblaci&oacute;n</strong> {{pais.population | number}}
+        </li>
+        <li class="list-group-item">
+          <strong>C&oacute;digo num&eacute;rico</strong> {{pais.ccn3}}
+        </li>
+        <li class="list-group-item">
+          <strong>C&oacute;digo alpha3</strong> {{pais.cca2}}
+        </li>
+      </ul>
+    </div>
+
+
+  </div>
+
+  <h3>Traducciones</h3>
+  <div class="row">
+    <div class="col">
+      <span class="badge bg-primary mr-1">{{pais.translations['ara'].official}}</span>
+      <span class="badge bg-primary mr-1">{{pais.translations['deu'].official}}</span>
+      <span class="badge bg-primary mr-1">{{pais.translations['fin'].official}}</span>
+      <span class="badge bg-primary mr-1">{{pais.translations['ces'].official}}</span>
+    </div>
+  </div>
+
+<!-- Util para debugear respuestas manipuladas -->
+<!--  <pre class="mt-5">-->
+<!--    {{pais | json}}-->
+<!--  </pre>-->
+
+</ng-template>

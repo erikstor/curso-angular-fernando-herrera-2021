@@ -8,15 +8,32 @@ import {Pais} from "../interfaces/pais.interface";
 })
 export class PaisService {
 
-  private apiUrl: string = 'https://restcountries.com/v3.1'
+  private apiUrl: string = 'https://restcountries.com'
+
+  private v3: string = 'v3.1'
+  private v2: string = 'v2'
 
   constructor(private http: HttpClient) {
   }
 
   buscarPais(termino: string): Observable<Pais[]> {
-    const url = `${this.apiUrl}/name/${termino}`
+    const url = `${this.apiUrl}/${this.v3}/name/${termino}`
 
     return this.http.get<Pais[]>(url)
   }
+
+  buscarPaisPorCapital(termino: string): Observable<Pais[]> {
+    const url = `${this.apiUrl}/${this.v3}/capital/${termino}`
+
+    return this.http.get<Pais[]>(url)
+  }
+
+
+  getPaisPorCodigo(id: string): Observable<Pais> {
+    const url = `${this.apiUrl}/${this.v3}/alpha/${id}`
+
+    return this.http.get<Pais>(url)
+  }
+
 
 }
