@@ -12,18 +12,21 @@ import {CustomMinDirectives} from "./directives/custom-min.directives";
 
 
 @NgModule({
-  declarations: [
-    BasicosComponent,
-    DinamicosComponent,
-    SwitchesComponent,
+    declarations: [
+        BasicosComponent,
+        DinamicosComponent,
+        SwitchesComponent,
 
-    CustomMinDirectives
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    TemplateRoutingModule
-  ]
+        CustomMinDirectives
+    ],
+    exports: [
+        CustomMinDirectives
+    ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        TemplateRoutingModule
+    ]
 })
 export class TemplateModule {
 }
