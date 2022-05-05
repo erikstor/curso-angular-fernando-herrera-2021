@@ -28,7 +28,7 @@ const crearUsuario = async (req = request, res = response) => {
         // guardar usuario en bd
         await dbUsuario.save()
         // generar respuesta
-        return res.status(201).json({ok: true, uuid: dbUsuario.id, name, token})
+        return res.status(201).json({ok: true, uuid: dbUsuario.id, name, token, email})
     } catch (e) {
 
     }
@@ -60,6 +60,7 @@ const loginUsuario = async (req = request, res = response) => {
             ok: true,
             uuid: dbUser.id,
             name: dbUser.name,
+            email,
             token
         })
     } catch (e) {
@@ -71,8 +72,14 @@ const loginUsuario = async (req = request, res = response) => {
 
 const renuew = async (req = request, res = response) => {
     const {uuid, name} = req
+    const dbUser = await Usuario.findOne({_id: uuid})
+
+    if (!dbUser) {
+        return res.status(400).json({ok: false, msg: 'Las credenciales no son validas'})
+    }
+
     const token = await generarJWT(uuid, name)
-    return res.json({ok: true, uuid, name, token})
+    return res.json({ok: true, uuid, name, token, email: dbUser.email})
 }
 
 module.exports = {
